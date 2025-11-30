@@ -7,13 +7,18 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
+
     <link rel="stylesheet" href="style.css">
     
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@2/tsparticles.engine.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-basic@2/tsparticles.basic.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+    <style>
+        .font-tall {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 0.05em; /* Sedikit jarak agar lebih mudah dibaca */
+        }
+    </style>
 </head>
 <body class="bg-black text-slate-300">
 
@@ -40,33 +45,32 @@
         <span class="font-adjuster-icon text-xl">A</span>
     </div>
 
-    <div class="container mx-auto px-4 pt-24 pb-12 max-w-3xl relative z-10">
 
-        <header class="text-center mb-16">
-            <div class="relative inline-block group mb-8">
-                <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1653944198i/61153762.jpg" alt="The Climate Book Cover" class="w-32 sm:w-44 mx-auto rounded shadow-2xl border border-slate-800 relative z-10 transform group-hover:scale-105 transition duration-500">
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-red-600 blur-[50px] opacity-20 group-hover:opacity-40 transition duration-700 -z-10"></div>
-            </div>
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl relative z-10">
+
+        <header class="text-center mb-12">
+            <img src="https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1653944198i/61153762.jpg" alt="The Climate Book Cover" class="w-48 mx-auto rounded-none shadow-[0_0_30px_rgba(255,255,255,0.1)] mb-8 border-2 border-slate-800">
             
-            <h1 class="text-5xl sm:text-7xl font-bold font-oswald climate-title uppercase tracking-tighter mb-2">
+            <h1 class="text-5xl sm:text-7xl title-spotlight uppercase font-tall leading-tight">
                 The Climate Book
             </h1>
-            
-            <h2 class="text-sm sm:text-lg text-slate-400 font-light tracking-[0.3em] uppercase mt-4 border-t border-slate-800 inline-block pt-4">
+            <h2 class="text-xl sm:text-2xl mt-3 font-medium text-slate-400 tracking-wide">
                 The Facts and the Solutions
             </h2>
     
-            <p class="mt-6 text-base font-medium text-slate-500 tracking-widest uppercase">
-                Author <br>
-                <span class="text-white font-bold mt-1 inline-block">Greta Thunberg</span>
+            <p class="mt-5">
+                <span class="text-slate-500 uppercase text-sm tracking-widest font-bold">Author</span><br>
+                <a href="https://www.goodreads.com/author/show/18804443.Greta_Thunberg" target="_blank" rel="noopener noreferrer" class="text-white hover:text-red-500 transition-colors font-bold text-lg">
+                    Greta Thunberg
+                </a>
             </p>
         </header>
 
-        <main id="articles-container" class="space-y-6">
+        <main id="articles-container" class="space-y-4">
             </main>
         
-        <footer class="text-center mt-24 pb-8 text-slate-600 text-xs tracking-wider uppercase">
-            <p>&copy; Syhr0el 2025 Bilingual Reader. Inspired by The Climate Book.</p>
+        <footer class="text-center mt-12 text-slate-500 text-sm">
+            <p>&copy; 2025 Bilingual Reader. Design inspired by Warming Stripes.</p>
         </footer>
 
     </div>
@@ -75,17 +79,20 @@
 
     <div id="vocab-sidebar">
         <div class="sidebar-header">
-            <h3 class="text-lg font-semibold text-white font-oswald tracking-wide">BOOKMARKS</h3>
+            <h3 class="text-lg font-bold text-white tracking-wide uppercase">Data Points</h3>
             <button id="clear-vocab-button" title="Hapus Semua">CLEAR ALL</button>
         </div>
-        <ul id="vocab-list"></ul>
+        <ul id="vocab-list">
+        </ul>
     </div>
 
     <div id="image-preview-overlay">
         <div class="preview-controls">
             <button class="preview-control-btn" id="zoom-in-button" title="Perbesar">+</button>
             <button class="preview-control-btn" id="zoom-out-button" title="Perkecil">-</button>
-            <button class="preview-control-btn" id="zoom-reset-button" title="Reset Zoom">↻</button>
+            <button class="preview-control-btn" id="zoom-reset-button" title="Reset Zoom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/></svg>
+            </button>
             <button class="preview-control-btn" id="preview-close-button" title="Tutup">&times;</button>
         </div>
         <img src="" alt="Pratinjau Gambar" id="preview-image">
