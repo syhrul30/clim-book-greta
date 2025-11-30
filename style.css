@@ -1,19 +1,71 @@
-/* ================================================================ */
-/* ======================== BASE STYLES =========================== */
-/* ================================================================ */
+/* Gaya dasar & Latar Belakang */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #050505; /* Deep Black */
+    background-color: #050505; /* Deep Void Black */
+    color: #e2e8f0;
     overflow-x: hidden;
-    color: #cbd5e1;
-}
 
-.font-oswald {
-    font-family: 'Oswald', sans-serif;
+    /* ======================================================== */
+    /* === AMBIENT GLOW (Climate Palette) === */
+    /* ======================================================== */
+    /* Layer 1: Biru di Kiri Atas (Mewakili suhu dingin/awal) */
+    /* Layer 2: Merah di Kanan Bawah (Mewakili pemanasan global/akhir) */
+    /* Layer 3: Putih Tipis di Tengah (Transisi) */
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.13) 0%, transparent 70%),
+        radial-gradient(circle at 100% 100%, rgba(239, 68, 68, 0.15) 0%, transparent 70%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+    
+    background-attachment: fixed; /* Agar cahaya tetap diam saat scroll (elegan) */
+    background-repeat: no-repeat;
 }
 
 /* ================================================================ */
-/* =========== KONFIGURASI BACKGROUND (TS PARTICLES) ============== */
+/* ================ SCROLLBAR GRADASI CLIMATE ===================== */
+/* ================================================================ */
+
+/* 1. Scrollbar Global (Web Utama) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505; /* Warna menyatu dengan body */
+}
+
+::-webkit-scrollbar-thumb {
+    /* Gradasi Climate: Biru (Dingin) -> Putih (Netral) -> Merah (Panas) */
+    background-image: linear-gradient(180deg, #3b82f6 0%, #f8fafc 50%, #ef4444 100%);
+    border-radius: 10px;
+    border: 3px solid #050505; /* Border tebal agar scrollbar terlihat "mengambang" */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border: 2px solid #050505; /* Membesar sedikit saat di-hover */
+}
+
+/* 2. Scrollbar Konten Artikel & Sidebar */
+.article-content::-webkit-scrollbar,
+#vocab-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.article-content::-webkit-scrollbar-track,
+#vocab-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.article-content::-webkit-scrollbar-thumb,
+#vocab-list::-webkit-scrollbar-thumb {
+    /* Gradasi yang sama tapi lebih halus untuk konten */
+    background-image: linear-gradient(180deg, #3b82f6, #ffffff, #ef4444);
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.5); /* Border tipis untuk kontras */
+}
+
+/* ================================================================ */
+/* ======================== BACKGROUND ============================ */
 /* ================================================================ */
 #tsparticles {
     position: fixed;
@@ -21,81 +73,26 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; 
-    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
 }
 
-.background-shapes, .shape1, .shape2, .shape3 { display: none; }
-
-/* ================================================================ */
-/* ================= BAR PROGRES CLIMATE STRIPES ================== */
-/* ================================================================ */
 #progress-bar {
     position: fixed;
     top: 0;
     left: 0;
     height: 4px;
-    background: linear-gradient(90deg, #1E3A8A, #3B82F6, #FFFFFF, #EF4444, #991B1B);
+    background: linear-gradient(90deg, #3b82f6 0%, #ffffff 50%, #ef4444 100%);
     width: 0%;
     z-index: 9999;
     transition: width 0.1s linear;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
 }
 
-/* ================================================================ */
-/* ============= GLOBAL SCROLLBAR (MAIN PAGE) ===================== */
-/* ================================================================ */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: #020617; 
-    border-left: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #1E3A8A, #3B82F6, #FFFFFF, #EF4444, #991B1B);
-    border-radius: 6px;
-    border: 3px solid #020617; 
-    background-clip: padding-box;
-    transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    border: 2px solid #020617;
-    background: linear-gradient(to bottom, #2563EB, #60A5FA, #FFFFFF, #F87171, #DC2626);
-}
-
-/* ================================================================ */
-/* ======================= TYPOGRAPHY & UI ======================== */
-/* ================================================================ */
-.climate-title {
-    background: linear-gradient(90deg, #60A5FA 0%, #FFFFFF 50%, #F87171 100%);
-    background-size: 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0px 0px 40px rgba(59, 130, 246, 0.3);
-    line-height: 1.1;
-    padding-bottom: 0.2em;
-}
-
-/* ================================================================ */
-/* ===================== KARTU ARTIKEL ============================ */
-/* ================================================================ */
 .article-container:not(.sub-article-container) {
-    border-radius: 8px;
+    border-radius: 4px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.12); 
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.article-container:not(.sub-article-container):hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .article-container {
@@ -103,319 +100,264 @@ body {
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
-.article-container.visible { opacity: 1; transform: translateY(0); }
+
+.article-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes temporary-highlight {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    50% { box-shadow: 0 0 25px 8px rgba(59, 130, 246, 0.2); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
+}
+
+.article-highlight {
+    animation: temporary-highlight 2s ease-out;
+}
+
+/* --- JUDUL UTAMA --- */
+.title-spotlight {
+    position: relative;
+    background: linear-gradient(90deg, #3b82f6, #ffffff, #ef4444, #3b82f6);
+    background-size: 300% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: spotlight 8s linear infinite;
+}
+
+@keyframes spotlight { to { background-position: -300% center; } }
 
 .article-header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
     cursor: pointer; 
-    padding: 1.5rem 2rem; 
-    background: linear-gradient(90deg, rgba(20, 25, 40, 0.9) 0%, rgba(10, 10, 15, 0.85) 100%);
+    padding: 1.25rem 1.5rem; 
+    border-radius: 4px; 
+    transition: all 0.3s ease; 
+    color: #f8fafc; 
+    background: rgba(10, 10, 10, 0.7); 
     backdrop-filter: blur(12px); 
     -webkit-backdrop-filter: blur(12px); 
     position: sticky; 
     top: 1rem; 
     z-index: 10; 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08); 
 }
 
 .article-header::before { 
     content: ''; 
     position: absolute; 
-    left: 0; top: 0; bottom: 0; 
-    width: 6px; 
-    background: linear-gradient(to bottom, #3B82F6, #FFFFFF, #EF4444); 
-    box-shadow: 2px 0 15px rgba(59, 130, 246, 0.4);
-    transition: width 0.3s ease;
+    top: 0; right: 0; bottom: 0; left: 0; 
+    z-index: -1; 
+    margin: -1px; 
+    border-radius: inherit; 
+    background: linear-gradient(120deg, rgba(59, 130, 246, 0.2), rgba(255, 255, 255, 0.1), rgba(239, 68, 68, 0.2)); 
+    opacity: 0.5;
 }
 
-.article-header:hover::before { width: 10px; }
-.article-header:hover { padding-left: 2.2rem; background: rgba(30, 41, 59, 0.95); }
-
-.article-header h3 { 
-    color: #F8FAFC; 
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 0.05em;
-    font-size: 1.25rem;
-    font-weight: 500;
-}
+.article-header h3 { color: #f1f5f9; font-weight: 700; letter-spacing: 0.025em; }
 
 .article-content { 
-    background: rgba(5, 5, 5, 0.95); 
+    background: rgba(10, 10, 10, 0.7); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
     border-top: none; 
+    border-radius: 0 0 4px 4px; 
     max-height: 0; 
     overflow: hidden; 
-    transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s ease; 
-    padding-left: 2rem; padding-right: 2rem; 
+    transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; 
+    padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; padding-bottom: 0; 
 }
 
-.article-content-inner p { 
-    margin-bottom: 1.5rem; 
-    text-align: justify; 
-    color: #cbd5e1;
-    font-weight: 300;
-    line-height: 1.8;
+.article-content-inner p { margin-bottom: 1rem; text-align: justify; text-indent: 0; line-height: 1.8; }
+
+.article-content-inner img {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border: 1px solid #333;
+}
+.article-content-inner img:hover {
+    transform: scale(1.01);
+    filter: brightness(1.1);
 }
 
-.article-container.active .article-header { background: rgba(30, 41, 59, 1); }
-.article-container.active .article-content { 
-    max-height: 90vh; overflow-y: auto; padding-top: 2rem; padding-bottom: 2rem; 
-}
-
+.article-container.active .article-header { border-radius: 4px 4px 0 0; background: rgba(20, 20, 20, 0.85); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
 .collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: #94a3b8; }
-.article-container.active .collapse-icon svg { transform: rotate(180deg); stroke: #ffffff; }
+.article-container.active .collapse-icon svg { transform: rotate(180deg); stroke: #ef4444; }
 
-/* ================================================================ */
-/* =========== SCROLLBAR INTERNAL ARTIKEL (CLIMATE THEME) ========= */
-/* ================================================================ */
-/* Mengatur lebar scrollbar */
-::-webkit-scrollbar {
-    width: 10px; /* Lebar ideal, tidak terlalu tebal */
-    height: 10px; /* Untuk scrollbar horizontal jika ada */
-}
-
-/* Jalur Scrollbar (Track) - Dibuat gelap transparan */
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05); /* Sedikit terlihat agar user tahu area scroll */
-    backdrop-filter: blur(5px);
-}
-
-/* Batang Scrollbar (Thumb) - SELALU BERWARNA */
-::-webkit-scrollbar-thumb {
-    /* Gradasi Vertikal: Biru -> Putih -> Merah */
-    /* Langsung terlihat jelas tanpa hover */
-    background: linear-gradient(180deg, #3B82F6 0%, #FFFFFF 50%, #EF4444 100%);
-    
-    border-radius: 5px; /* Membulat */
-    
-    /* Border tipis saja (1px) agar warna tidak tertutup */
-    border: 2px solid #050505; 
-}
-
-/* Efek Hover - Lebih Terang & Border Menipis */
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #60A5FA 0%, #FFFFFF 50%, #F87171 100%);
-    border: 1px solid #050505; /* Saat hover, border menipis agar batang terlihat "gemuk" */
-}
-/* ================================================================ */
-/* =================== INTERAKSI TEKS & POPUP ===================== */
-/* ================================================================ */
 .original-text-segment { 
     cursor: pointer; 
-    transition: all 0.2s ease; 
-    padding: 0 2px;
-    border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease; 
+    padding: 2px 0; 
+    border-radius: 2px; 
 }
-.original-text-segment:hover { 
-    background-color: rgba(59, 130, 246, 0.2); 
-    color: #ffffff;
-    border-bottom-color: #3B82F6;
-}
+.original-text-segment:hover { background-color: rgba(59, 130, 246, 0.15); color: #fff; }
 
 .selected-text { 
-    background-color: rgba(239, 68, 68, 0.25); 
-    color: #ffffff; 
-    border-bottom: 1px solid #EF4444;
+    background-color: #1e3a8a; 
+    color: #fff; 
+    box-shadow: 0 0 0 2px #1e3a8a;
+    font-weight: 500; 
 }
 
-@keyframes highlight-pulse {
-    0%, 100% { background-color: transparent; }
-    50% { background-color: rgba(239, 68, 68, 0.3); }
+@keyframes bookmark-blink {
+    0%, 100% { background-color: transparent; color: inherit; }
+    50% { background-color: #ef4444; color: #fff; }
 }
-.bookmark-highlight { animation: highlight-pulse 0.8s ease-in-out 3; }
+
+.bookmark-highlight { animation: bookmark-blink 0.8s ease-in-out 3; }
 
 #translation-popup { 
-    display: flex; align-items: center; gap: 1rem; 
-    position: absolute; z-index: 50; 
-    transform: translateY(10px); transition: opacity 0.2s ease; 
+    display: flex; align-items: center; gap: 0.75rem; 
+    position: absolute; z-index: 20; 
+    transform: translateY(12px); 
+    transition: opacity 0.2s ease-in-out; 
     pointer-events: none; opacity: 0; 
-    padding: 1rem 1.25rem; border-radius: 4px; 
-    max-width: 400px; font-size: 0.95rem; line-height: 1.5;
+    padding: 1rem; border-radius: 4px; 
+    max-width: 450px; 
+    font-size: 0.95rem; 
     color: #e2e8f0; 
-    background: #0f172a; 
-    border: 1px solid #334155; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    background: rgba(5, 5, 5, 0.95); 
+    border: 1px solid #334155;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
 }
 #translation-popup.visible { opacity: 1; pointer-events: auto; }
-#translation-popup::before { 
-    content: ''; position: absolute; bottom: 100%; left: 20px; 
-    border-width: 6px; border-style: solid; 
-    border-color: transparent transparent #334155 transparent; 
-}
+#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent #334155 transparent; }
 
 .add-vocab-btn {
     background-color: transparent;
-    border: 1px solid #3B82F6;
-    color: #3B82F6;
-    border-radius: 4px; 
-    width: 28px; height: 28px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: bold; cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
 }
-.add-vocab-btn:hover { background: #3B82F6; color: white; }
-.add-vocab-btn.added { background: #EF4444; border-color: #EF4444; color: white; } 
+.add-vocab-btn:hover { background-color: #ef4444; color: black; }
+.add-vocab-btn.added { background-color: #22c55e; color: black; border-color: #22c55e; }
 
-/* ================================================================ */
-/* ===================== UI CONTROLS & SIDEBAR ==================== */
-/* ================================================================ */
-.ui-controls { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.75rem; }
-
+.ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
 #font-adjuster-toggle, #vocab-toggle-button { 
     padding: 0.6rem; border-radius: 4px; cursor: pointer; 
-    background: rgba(0, 0, 0, 0.7); 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    color: #94a3b8; transition: all 0.2s; 
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.6); 
+    border: 1px solid #334155; 
+    color: #94a3b8; 
+    transition: all 0.2s ease-in-out; 
 }
-#font-adjuster-toggle:hover, #vocab-toggle-button:hover { 
-    border-color: #3B82F6; color: #ffffff; background: black;
-}
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: #1e293b; color: #fff; border-color: #ef4444; }
 
 #font-adjuster-container { 
-    position: fixed; 
-    top: 5rem; 
-    right: 1.5rem; 
-    
-    /* TAMBAHKAN INI: Agar muncul di atas artikel */
-    z-index: 1005; 
-    
-    background: #0f172a; 
-    border: 1px solid #334155;
-    padding: 1rem; 
-    border-radius: 4px;
-    display: flex; 
-    align-items: center; 
-    gap: 0.75rem; 
-    opacity: 0; 
-    transform: translateY(-10px); 
-    pointer-events: none; 
+    position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; 
+    display: flex; align-items: center; gap: 0.75rem; 
+    padding: 1rem; border-radius: 4px; 
+    background: rgba(10, 10, 10, 0.95); 
+    border: 1px solid #334155; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    opacity: 0; transform: translateY(-10px); pointer-events: none; 
     transition: opacity 0.3s ease, transform 0.3s ease; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 #font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.font-adjuster-icon { color: #fff; font-weight: 700; }
 
-input[type="range"] { -webkit-appearance: none; background: #334155; height: 3px; width: 100px; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; height: 2px; background: #334155; outline: none; cursor: pointer; }
 input[type="range"]::-webkit-slider-thumb { 
-    -webkit-appearance: none; width: 14px; height: 14px; 
-    background: #3B82F6; border-radius: 50%; cursor: pointer; 
-    transition: transform 0.1s;
+    -webkit-appearance: none; appearance: none; 
+    width: 16px; height: 16px; 
+    background: #ef4444; 
+    border-radius: 50%; 
+    transition: transform 0.2s ease; 
 }
 input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
+#articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
+#articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
+#articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.8rem; }
+#articles-container.font-size-4 .text-lg { font-size: 1.25rem; line-height: 2.0rem; }
+#articles-container.font-size-5 .text-lg { font-size: 1.5rem; line-height: 2.25rem; }
+
+.sub-article-container { margin-left: 1.5rem; width: calc(100% - 1.5rem); margin-top: 1.5rem; position: relative; }
+.sub-article-container .article-header { background: rgba(20, 20, 20, 0.4); border: 1px dashed #334155; }
+.sub-article-container .article-header::before { display: none; }
+.sub-article-container .article-header h3 { font-size: 1rem; color: #94a3b8; }
+.sub-article-container::before { content: ''; position: absolute; left: -0.75rem; top: 0; bottom: 0; width: 1px; background-color: #334155; }
+.sub-article-container.active .article-header h3 { color: #3b82f6; }
+
 #vocab-sidebar {
-    background: #000000;
-    border-left: 1px solid #334155;
-    position: fixed; top: 0; right: 0; width: 350px; height: 100%; z-index: 1002;
-    transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: fixed; top: 0; right: 0; 
+    width: 400px; max-width: 90vw; height: 100%; 
+    z-index: 1002; 
+    background: rgba(5, 5, 5, 0.95); 
+    border-left: 1px solid #334155; 
+    transform: translateX(100%); 
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
     display: flex; flex-direction: column;
 }
+
 #vocab-sidebar.visible { transform: translateX(0); }
 
-.sidebar-header { 
-    border-bottom: 1px solid #1e293b; padding: 1.5rem;
-    display: flex; justify-content: space-between; align-items: center;
-    background: #050505;
+.sidebar-header {
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 1.5rem; border-bottom: 1px solid #334155; flex-shrink: 0;
 }
 
-#clear-vocab-button { 
-    color: #EF4444; background: rgba(239, 68, 68, 0.1); 
-    border: none; border-radius: 2px; padding: 0.25rem 0.75rem; 
-    font-size: 0.75rem; font-weight: bold; cursor: pointer;
-    transition: all 0.2s;
+#clear-vocab-button {
+    background: transparent; border: 1px solid #ef4444; 
+    color: #ef4444; padding: 0.25rem 0.75rem; border-radius: 2px; 
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.2s ease;
 }
-#clear-vocab-button:hover { background: rgba(239, 68, 68, 0.2); }
+#clear-vocab-button:hover { background: #ef4444; color: black; }
 
-.vocab-item { 
-    background: #0f172a; border: 1px solid #1e293b; 
-    margin: 0.75rem; padding: 1rem; border-radius: 4px; 
-    transition: border-color 0.2s;
+#vocab-list { list-style: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
+
+.vocab-item {
+    padding: 1.2rem; margin: 0; 
+    border-bottom: 1px solid #1e293b; 
+    background-color: transparent; 
+    transition: background-color 0.2s ease; 
+    cursor: pointer; position: relative;
 }
-.vocab-item:hover { border-color: #3B82F6; }
-.vocab-item-original { color: #f1f5f9; font-weight: 600; font-family: 'Oswald', sans-serif; letter-spacing: 0.03em; }
-.vocab-item-translation { color: #94a3b8; margin-top: 0.25rem; font-style: italic; font-size: 0.9rem; }
-.vocab-item-source { 
-    margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px dashed #1e293b;
-    font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; 
+.vocab-item:hover { background-color: #0f172a; }
+
+.vocab-item-original { font-weight: 600; color: #f1f5f9; margin-bottom: 0.4rem; font-size: 1.05rem; }
+.vocab-item-translation { font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.75rem; font-style: italic; }
+.vocab-item-source { font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.delete-vocab-btn {
+    position: absolute; top: 1.2rem; right: 1.2rem; 
+    background: none; border: none; color: #475569; 
+    font-size: 1.2rem; cursor: pointer; opacity: 0.5;
 }
-.empty-vocab-message { color: #475569; text-align: center; margin-top: 3rem; font-size: 0.9rem; }
+.vocab-item:hover .delete-vocab-btn { opacity: 1; color: #ef4444; }
 
-.sub-article-container { border-left: 1px solid #334155; margin-left: 1.5rem; margin-top: 1rem; width: auto; }
-.sub-article-container .article-header { background: transparent; padding-left: 1rem; border: none; }
-.sub-article-container .article-header::before { display: none; }
-.sub-article-container .article-content { background: transparent; padding-left: 1rem; }
-
-#articles-container.font-size-1 .text-lg { font-size: 0.9rem; }
-#articles-container.font-size-2 .text-lg { font-size: 1rem; }
-#articles-container.font-size-3 .text-lg { font-size: 1.125rem; }
-#articles-container.font-size-4 .text-lg { font-size: 1.25rem; }
-#articles-container.font-size-5 .text-lg { font-size: 1.5rem; }
-
-/* ================================================================ */
-/* ============= IMAGE PREVIEW OVERLAY (FIXED) ==================== */
-/* ================================================================ */
 #image-preview-overlay {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 2000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    backdrop-filter: blur(8px);
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0, 0, 0, 0.9); 
+    backdrop-filter: blur(5px); 
+    z-index: 2000; display: none; 
+    align-items: center; justify-content: center; 
+    opacity: 0; pointer-events: none; 
+    transition: opacity 0.3s ease-in-out; overflow: hidden;
 }
-
-#image-preview-overlay.visible {
-    opacity: 1;
-    pointer-events: auto;
-    display: flex;
-}
-
-#preview-image {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    transform-origin: center center;
-    transition: transform 0.1s ease-out;
-}
-
+#image-preview-overlay.visible { opacity: 1; pointer-events: auto; }
+#preview-image { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 2px; box-shadow: 0 0 50px rgba(0,0,0,1); transition: transform 0.2s ease-out; }
 #preview-image.pannable { cursor: grab; }
 #preview-image.panning { cursor: grabbing; }
 
 .preview-controls {
-    position: absolute; 
-    top: 50%; 
-    right: 2rem;
-    transform: translateY(-50%); 
-    display: flex;
-    flex-direction: column; 
-    gap: 1rem; 
-    z-index: 2001; 
+    position: absolute; top: 50%; transform: translateY(-50%); right: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    background: transparent; z-index: 10;
 }
-
-.preview-control-btn { 
-    width: 44px; height: 44px; border-radius: 8px;
-    background: rgba(30, 41, 59, 0.8); 
-    color: white; 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.5rem; 
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    backdrop-filter: blur(4px);
+.preview-control-btn {
+    width: 44px; height: 44px; border: 1px solid #334155; border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5); color: #fff; font-size: 1.2rem;
+    cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center;
 }
-
-.preview-control-btn:hover { 
-    background: #3B82F6; 
-    border-color: #3B82F6; 
-    transform: scale(1.1);
-}
+.preview-control-btn:hover { background-color: #fff; color: black; }
