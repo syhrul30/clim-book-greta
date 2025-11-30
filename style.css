@@ -1,0 +1,409 @@
+/* ================================================================ */
+/* ======================== BASE STYLES =========================== */
+/* ================================================================ */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #050505; /* Deep Black */
+    overflow-x: hidden;
+    color: #cbd5e1;
+}
+
+.font-oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+/* ================================================================ */
+/* =========== KONFIGURASI BACKGROUND (TS PARTICLES) ============== */
+/* ================================================================ */
+#tsparticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; 
+    pointer-events: none;
+}
+
+.background-shapes, .shape1, .shape2, .shape3 { display: none; }
+
+/* ================================================================ */
+/* ================= BAR PROGRES CLIMATE STRIPES ================== */
+/* ================================================================ */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1E3A8A, #3B82F6, #FFFFFF, #EF4444, #991B1B);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+/* ================================================================ */
+/* ============= GLOBAL SCROLLBAR (MAIN PAGE) ===================== */
+/* ================================================================ */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020617; 
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #1E3A8A, #3B82F6, #FFFFFF, #EF4444, #991B1B);
+    border-radius: 6px;
+    border: 3px solid #020617; 
+    background-clip: padding-box;
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    border: 2px solid #020617;
+    background: linear-gradient(to bottom, #2563EB, #60A5FA, #FFFFFF, #F87171, #DC2626);
+}
+
+/* ================================================================ */
+/* ======================= TYPOGRAPHY & UI ======================== */
+/* ================================================================ */
+.climate-title {
+    background: linear-gradient(90deg, #60A5FA 0%, #FFFFFF 50%, #F87171 100%);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 0px 40px rgba(59, 130, 246, 0.3);
+    line-height: 1.1;
+    padding-bottom: 0.2em;
+}
+
+/* ================================================================ */
+/* ===================== KARTU ARTIKEL ============================ */
+/* ================================================================ */
+.article-container:not(.sub-article-container) {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.article-container:not(.sub-article-container):hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.article-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.article-container.visible { opacity: 1; transform: translateY(0); }
+
+.article-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    cursor: pointer; 
+    padding: 1.5rem 2rem; 
+    background: linear-gradient(90deg, rgba(20, 25, 40, 0.9) 0%, rgba(10, 10, 15, 0.85) 100%);
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    position: sticky; 
+    top: 1rem; 
+    z-index: 10; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.article-header::before { 
+    content: ''; 
+    position: absolute; 
+    left: 0; top: 0; bottom: 0; 
+    width: 6px; 
+    background: linear-gradient(to bottom, #3B82F6, #FFFFFF, #EF4444); 
+    box-shadow: 2px 0 15px rgba(59, 130, 246, 0.4);
+    transition: width 0.3s ease;
+}
+
+.article-header:hover::before { width: 10px; }
+.article-header:hover { padding-left: 2.2rem; background: rgba(30, 41, 59, 0.95); }
+
+.article-header h3 { 
+    color: #F8FAFC; 
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.article-content { 
+    background: rgba(5, 5, 5, 0.95); 
+    border-top: none; 
+    max-height: 0; 
+    overflow: hidden; 
+    transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s ease; 
+    padding-left: 2rem; padding-right: 2rem; 
+}
+
+.article-content-inner p { 
+    margin-bottom: 1.5rem; 
+    text-align: justify; 
+    color: #cbd5e1;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.article-container.active .article-header { background: rgba(30, 41, 59, 1); }
+.article-container.active .article-content { 
+    max-height: 90vh; overflow-y: auto; padding-top: 2rem; padding-bottom: 2rem; 
+}
+
+.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: #94a3b8; }
+.article-container.active .collapse-icon svg { transform: rotate(180deg); stroke: #ffffff; }
+
+/* ================================================================ */
+/* =========== SCROLLBAR INTERNAL ARTIKEL (CLIMATE THEME) ========= */
+/* ================================================================ */
+/* Mengatur lebar scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Lebar ideal, tidak terlalu tebal */
+    height: 10px; /* Untuk scrollbar horizontal jika ada */
+}
+
+/* Jalur Scrollbar (Track) - Dibuat gelap transparan */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* Sedikit terlihat agar user tahu area scroll */
+    backdrop-filter: blur(5px);
+}
+
+/* Batang Scrollbar (Thumb) - SELALU BERWARNA */
+::-webkit-scrollbar-thumb {
+    /* Gradasi Vertikal: Biru -> Putih -> Merah */
+    /* Langsung terlihat jelas tanpa hover */
+    background: linear-gradient(180deg, #3B82F6 0%, #FFFFFF 50%, #EF4444 100%);
+    
+    border-radius: 5px; /* Membulat */
+    
+    /* Border tipis saja (1px) agar warna tidak tertutup */
+    border: 2px solid #050505; 
+}
+
+/* Efek Hover - Lebih Terang & Border Menipis */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #60A5FA 0%, #FFFFFF 50%, #F87171 100%);
+    border: 1px solid #050505; /* Saat hover, border menipis agar batang terlihat "gemuk" */
+}
+/* ================================================================ */
+/* =================== INTERAKSI TEKS & POPUP ===================== */
+/* ================================================================ */
+.original-text-segment { 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+    padding: 0 2px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+}
+.original-text-segment:hover { 
+    background-color: rgba(59, 130, 246, 0.2); 
+    color: #ffffff;
+    border-bottom-color: #3B82F6;
+}
+
+.selected-text { 
+    background-color: rgba(239, 68, 68, 0.25); 
+    color: #ffffff; 
+    border-bottom: 1px solid #EF4444;
+}
+
+@keyframes highlight-pulse {
+    0%, 100% { background-color: transparent; }
+    50% { background-color: rgba(239, 68, 68, 0.3); }
+}
+.bookmark-highlight { animation: highlight-pulse 0.8s ease-in-out 3; }
+
+#translation-popup { 
+    display: flex; align-items: center; gap: 1rem; 
+    position: absolute; z-index: 50; 
+    transform: translateY(10px); transition: opacity 0.2s ease; 
+    pointer-events: none; opacity: 0; 
+    padding: 1rem 1.25rem; border-radius: 4px; 
+    max-width: 400px; font-size: 0.95rem; line-height: 1.5;
+    color: #e2e8f0; 
+    background: #0f172a; 
+    border: 1px solid #334155; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+#translation-popup.visible { opacity: 1; pointer-events: auto; }
+#translation-popup::before { 
+    content: ''; position: absolute; bottom: 100%; left: 20px; 
+    border-width: 6px; border-style: solid; 
+    border-color: transparent transparent #334155 transparent; 
+}
+
+.add-vocab-btn {
+    background-color: transparent;
+    border: 1px solid #3B82F6;
+    color: #3B82F6;
+    border-radius: 4px; 
+    width: 28px; height: 28px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+}
+.add-vocab-btn:hover { background: #3B82F6; color: white; }
+.add-vocab-btn.added { background: #EF4444; border-color: #EF4444; color: white; } 
+
+/* ================================================================ */
+/* ===================== UI CONTROLS & SIDEBAR ==================== */
+/* ================================================================ */
+.ui-controls { position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.75rem; }
+
+#font-adjuster-toggle, #vocab-toggle-button { 
+    padding: 0.6rem; border-radius: 4px; cursor: pointer; 
+    background: rgba(0, 0, 0, 0.7); 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    color: #94a3b8; transition: all 0.2s; 
+    backdrop-filter: blur(5px);
+}
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { 
+    border-color: #3B82F6; color: #ffffff; background: black;
+}
+
+#font-adjuster-container { 
+    position: fixed; top: 5rem; right: 1.5rem; 
+    background: #0f172a; border: 1px solid #334155;
+    padding: 1rem; border-radius: 4px;
+    display: flex; align-items: center; gap: 0.75rem; 
+    opacity: 0; transform: translateY(-10px); pointer-events: none; 
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+#font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+input[type="range"] { -webkit-appearance: none; background: #334155; height: 3px; width: 100px; }
+input[type="range"]::-webkit-slider-thumb { 
+    -webkit-appearance: none; width: 14px; height: 14px; 
+    background: #3B82F6; border-radius: 50%; cursor: pointer; 
+    transition: transform 0.1s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+#vocab-sidebar {
+    background: #000000;
+    border-left: 1px solid #334155;
+    position: fixed; top: 0; right: 0; width: 350px; height: 100%; z-index: 1002;
+    transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex; flex-direction: column;
+}
+#vocab-sidebar.visible { transform: translateX(0); }
+
+.sidebar-header { 
+    border-bottom: 1px solid #1e293b; padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: #050505;
+}
+
+#clear-vocab-button { 
+    color: #EF4444; background: rgba(239, 68, 68, 0.1); 
+    border: none; border-radius: 2px; padding: 0.25rem 0.75rem; 
+    font-size: 0.75rem; font-weight: bold; cursor: pointer;
+    transition: all 0.2s;
+}
+#clear-vocab-button:hover { background: rgba(239, 68, 68, 0.2); }
+
+.vocab-item { 
+    background: #0f172a; border: 1px solid #1e293b; 
+    margin: 0.75rem; padding: 1rem; border-radius: 4px; 
+    transition: border-color 0.2s;
+}
+.vocab-item:hover { border-color: #3B82F6; }
+.vocab-item-original { color: #f1f5f9; font-weight: 600; font-family: 'Oswald', sans-serif; letter-spacing: 0.03em; }
+.vocab-item-translation { color: #94a3b8; margin-top: 0.25rem; font-style: italic; font-size: 0.9rem; }
+.vocab-item-source { 
+    margin-top: 0.75rem; padding-top: 0.5rem; border-top: 1px dashed #1e293b;
+    font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; 
+}
+.empty-vocab-message { color: #475569; text-align: center; margin-top: 3rem; font-size: 0.9rem; }
+
+.sub-article-container { border-left: 1px solid #334155; margin-left: 1.5rem; margin-top: 1rem; width: auto; }
+.sub-article-container .article-header { background: transparent; padding-left: 1rem; border: none; }
+.sub-article-container .article-header::before { display: none; }
+.sub-article-container .article-content { background: transparent; padding-left: 1rem; }
+
+#articles-container.font-size-1 .text-lg { font-size: 0.9rem; }
+#articles-container.font-size-2 .text-lg { font-size: 1rem; }
+#articles-container.font-size-3 .text-lg { font-size: 1.125rem; }
+#articles-container.font-size-4 .text-lg { font-size: 1.25rem; }
+#articles-container.font-size-5 .text-lg { font-size: 1.5rem; }
+
+/* ================================================================ */
+/* ============= IMAGE PREVIEW OVERLAY (FIXED) ==================== */
+/* ================================================================ */
+#image-preview-overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+#image-preview-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+}
+
+#preview-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    transform-origin: center center;
+    transition: transform 0.1s ease-out;
+}
+
+#preview-image.pannable { cursor: grab; }
+#preview-image.panning { cursor: grabbing; }
+
+.preview-controls {
+    position: absolute; 
+    top: 50%; 
+    right: 2rem;
+    transform: translateY(-50%); 
+    display: flex;
+    flex-direction: column; 
+    gap: 1rem; 
+    z-index: 2001; 
+}
+
+.preview-control-btn { 
+    width: 44px; height: 44px; border-radius: 8px;
+    background: rgba(30, 41, 59, 0.8); 
+    color: white; 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem; 
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
+}
+
+.preview-control-btn:hover { 
+    background: #3B82F6; 
+    border-color: #3B82F6; 
+    transform: scale(1.1);
+}
