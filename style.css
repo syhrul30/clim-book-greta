@@ -324,12 +324,40 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
     cursor: pointer; position: relative;
 }
 .vocab-item:hover { background-color: #0f172a; }
-
-.vocab-item-original { font-weight: 600; color: #f1f5f9; margin-bottom: 0.4rem; font-size: 1.05rem; }
-.vocab-item-translation { font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.75rem; font-style: italic; }
-.vocab-item-source { font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; }
-
-.delete-vocab-btn {
+ 
+.vocab-item.last-read {
+   background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), transparent);
+   border-left: 3px solid #3b82f6;
+}
+ 
+.vocab-divider {
+   padding: 1rem 1.2rem 0.5rem;
+   font-size: 0.7rem;
+   font-weight: 800;
+   letter-spacing: 0.1em;
+   color: #94a3b8;
+   border-bottom: 1px solid #334155;
+   margin-bottom: 0.5rem;
+   text-transform: uppercase;
+}
+ 
+.last-read-badge {
+   display: inline-block;
+   font-size: 0.6rem;
+   padding: 2px 6px;
+   border-radius: 2px;
+   background-color: #3b82f6;
+   color: white;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}
+ 
+.vocab-item-book { font-size: 0.7rem; color: #64748b; margin-bottom: 0.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; }
+.vocab-item-original { font-weight: 600; color: #f1f5f9; margin-bottom: 0.2rem; font-size: 1.05rem; }
+ .vocab-item-translation { font-size: 0.95rem; color: #94a3b8; margin-bottom: 0.75rem; font-style: italic; }
+.vocab-item-source { font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; display: none; } /* Hidden, replaced by vocab-item-book */
+ 
+ .delete-vocab-btn {
     position: absolute; top: 1.2rem; right: 1.2rem; 
     background: none; border: none; color: #475569; 
     font-size: 1.2rem; cursor: pointer; opacity: 0.5;
